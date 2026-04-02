@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Text Formatting Tags</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f6;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th {
+            background-color: #34495e;
+            color: #ffffff;
+            text-align: left;
+            padding: 12px;
+            font-size: 15px;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: #f5f9ff;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        kbd {
+            background-color: #e1e1e1;
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            box-shadow: inset 0 -2px 0 #bbb;
+        }
+
+        mark {
+            background-color: #fff3a0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        blockquote {
+            margin: 0;
+            padding-left: 15px;
+            border-left: 4px solid #3498db;
+            color: #555;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>HTML Text Formatting Tags</h1>
+        <p class="subtitle">
+            A clean demonstration of commonly used HTML text formatting tags with examples.
+        </p>
+
+        <table>
+            <tr>
+                <th>Tag</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+
+            <tr>
+                <td>&lt;b&gt;</td>
+                <td>Bold text</td>
+                <td><b>Bold Text</b></td>
+            </tr>
+
+            <tr>
+                <td>&lt;strong&gt;</td>
+                <td>Important text</td>
+                <td><strong>Strong Text</strong></td>
+            </tr>
+
+            <tr>
+                <td>&lt;i&gt;</td>
+                <td>Italic text</td>
+                <td><i>Italic Text</i></td>
+            </tr>
+
+            <tr>
+                <td>&lt;em&gt;</td>
+                <td>Emphasized text</td>
+                <td><em>Emphasized Text</em></td>
+            </tr>
+
+            <tr>
+                <td>&lt;u&gt;</td>
+                <td>Underlined text</td>
+                <td><u>Underlined Text</u></td>
+            </tr>
+
+            <tr>
+                <td>&lt;mark&gt;</td>
+                <td>Highlighted text</td>
+                <td><mark>Marked Text</mark></td>
+            </tr>
+
+            <tr>
+                <td>&lt;small&gt;</td>
+                <td>Small text</td>
+                <td><small>Small Text</small></td>
+            </tr>
+
+            <tr>
+                <td>&lt;del&gt;</td>
+                <td>Deleted text</td>
+                <td><del>Deleted Text</del></td>
+            </tr>
+
+            <tr>
+                <td>&lt;ins&gt;</td>
+                <td>Inserted text</td>
+                <td><ins>Inserted Text</ins></td>
+            </tr>
+
+            <tr>
+                <td>&lt;sub&gt;</td>
+                <td>Subscript</td>
+                <td>H<sub>2</sub>O</td>
+            </tr>
+
+            <tr>
+                <td>&lt;sup&gt;</td>
+                <td>Superscript</td>
+                <td>x<sup>2</sup></td>
+            </tr>
+
+            <tr>
+                <td>&lt;code&gt;</td>
+                <td>Inline code</td>
+                <td><code>printf("Hi");</code></td>
+            </tr>
+
+            <tr>
+                <td>&lt;pre&gt;</td>
+                <td>Preformatted text</td>
+                <td>
+                    <pre>
+Line 1
+Line 2
+                    </pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td>&lt;kbd&gt;</td>
+                <td>Keyboard input</td>
+                <td><kbd>Ctrl + C</kbd></td>
+            </tr>
+
+            <tr>
+                <td>&lt;abbr&gt;</td>
+                <td>Abbreviation</td>
+                <td><abbr title="HyperText Markup Language">HTML</abbr></td>
+            </tr>
+
+            <tr>
+                <td>&lt;q&gt;</td>
+                <td>Short quotation</td>
+                <td><q>Knowledge is power</q></td>
+            </tr>
+
+            <tr>
+                <td>&lt;blockquote&gt;</td>
+                <td>Block quotation</td>
+                <td>
+                    <blockquote>
+                        Learning never exhausts the mind.
+                    </blockquote>
+                </td>
+            </tr>
+        </table>
+
+        <footer>
+            © HTML Formatting Tags Demo
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
