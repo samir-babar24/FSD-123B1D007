@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Luxury Store</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">AURA<span>.</span></div>
+        <div class="nav-links" style="gap: 40px;">
+            <a href="index.html" class="active">Home</a>
+            <a href="cart.html"><i class="fas fa-shopping-bag"></i> <span id="cart-count" class="badge">0</span></a>
+            <div id="nav-auth"></div>
+        </div>
+    </nav>
+
+    <header
+        style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200') center/cover; height: 50vh; display:flex; align-items:center; justify-content:center; text-align:center; color:white;">
+        <div class="fade-in">
+            <h1 style="font-size:3.5rem; color:white; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">Elevate Your Style</h1>
+            <p style="font-size:1.2rem; margin:15px 0;">Curated essentials for the modern lifestyle.</p>
+        </div>
+    </header>
+
+    <div class="container fade-in">
+        <h2 style="text-align:center; margin-top:2rem;">Latest Collection</h2>
+        <div class="search-filter-row">
+
+            <div style="flex: 5; min-width: 250px;">
+                <label class="search-label">Search</label>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search products..."
+                    onkeyup="searchProducts()">
+            </div>
+
+            <div style="flex: 1; min-width: 200px;">
+                <label class="search-label">Filter by Price</label>
+                <select class="form-select" onchange="filterPrice(this.value)">
+                    <option value="all">All Prices</option>
+                    <option value="low">Below $100</option>
+                    <option value="mid">$100 - $200</option>
+                    <option value="high">Above $200</option>
+                </select>
+            </div>
+
+        </div>
+        <div id="product-list" class="product-grid"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

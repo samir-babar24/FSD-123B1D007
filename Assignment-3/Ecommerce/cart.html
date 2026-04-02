@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart | Aura</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">AURA<span>.</span></a></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <div id="nav-auth"></div>
+        </div>
+    </nav>
+
+    <div class="container fade-in">
+        <h2 style="margin-bottom:20px;">Shopping Cart</h2>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    </tbody>
+            </table>
+        </div>
+
+        <div style="text-align:right; margin-top:30px;">
+            <h3>Total: $<span id="cart-total">0</span></h3>
+            <button class="btn" onclick="checkout()" style="margin-top:15px;">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
