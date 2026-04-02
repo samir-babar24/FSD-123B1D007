@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction | FinFlow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="app-wrapper">
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-bolt"></i> FinFlow
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a></li>
+                <li class="active"><a href="#"><i class="fa-solid fa-plus-circle"></i> Add New</a></li>
+                <li><a href="#" id="theme-toggle"><i class="fa-solid fa-moon"></i> Theme</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h1>New Entry</h1>
+                    <p>Record your latest financial activity</p>
+                </div>
+            </header>
+
+            <div class="glass form-card">
+                <form id="transaction-form">
+                    <div class="form-group">
+                        <label>Transaction Type</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="type" value="expense" checked>
+                                <span class="radio-btn expense-btn"><i class="fa-solid fa-arrow-down"></i>
+                                    Expense</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="type" value="income">
+                                <span class="radio-btn income-btn"><i class="fa-solid fa-arrow-up"></i> Income</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="amount">Amount ($)</label>
+                            <input type="number" id="amount" class="glass-input" placeholder="0.00" min="0.01"
+                                step="0.01" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" class="glass-input" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" class="glass-input" required>
+                            <option value="Food">🍔 Food & Dining</option>
+                            <option value="Rent">🏠 Rent & Housing</option>
+                            <option value="Travel">✈️ Transport & Travel</option>
+                            <option value="Utilities">💡 Utilities & Bills</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Salary">💰 Salary (Income)</option>
+                            <option value="Freelance">💻 Freelance (Income)</option>
+                            <option value="Other">🔌 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Note (Optional)</label>
+                        <input type="text" id="description" class="glass-input" placeholder="e.g., Grocery at Walmart">
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        Save Transaction <i class="fa-solid fa-check"></i>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        document.getElementById('transaction-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newTransaction = {
+                type: document.querySelector('input[name="type"]:checked').value,
+                amount: parseFloat(document.getElementById('amount').value),
+                category: document.getElementById('category').value,
+                date: document.getElementById('date').value,
+                desc: document.getElementById('description').value
+            };
+
+            DataManager.addTransaction(newTransaction);
+            // Optional: Show a cooler notification here instead of alert
+            alert('Transaction Saved Successfully!');
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('date').valueAsDate = new Date();
+    </script>
+</body>
+
+</html>

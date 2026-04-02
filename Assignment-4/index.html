@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinFlow | Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div class="app-wrapper">
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-bolt"></i> FinFlow
+            </div>
+            <ul class="nav-links">
+                <li class="active"><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+                <li><a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a></li>
+                <li><a href="add-expense.html"><i class="fa-solid fa-plus-circle"></i> Add New</a></li>
+                <li><a href="#" id="theme-toggle"><i class="fa-solid fa-moon"></i> Theme</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h1>Dashboard</h1>
+                    <p>Your financial overview</p>
+                </div>
+                <div class="controls">
+                    <select id="month-filter" class="glass-input">
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-card glass income">
+                    <div class="stat-icon"><i class="fa-solid fa-arrow-up"></i></div>
+                    <div class="stat-info">
+                        <span>Income</span>
+                        <h2 id="total-income">$0.00</h2>
+                    </div>
+                </div>
+                <div class="stat-card glass expense">
+                    <div class="stat-icon"><i class="fa-solid fa-arrow-down"></i></div>
+                    <div class="stat-info">
+                        <span>Expenses</span>
+                        <h2 id="total-expense">$0.00</h2>
+                    </div>
+                </div>
+                <div class="stat-card glass balance">
+                    <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <div class="stat-info">
+                        <span>Balance</span>
+                        <h2 id="total-balance">$0.00</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-grid">
+                <div class="chart-card glass">
+                    <div class="card-header">
+                        <h3>Analytics Trend</h3>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card glass">
+                    <div class="card-header">
+                        <h3>Distribution</h3>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card glass small-chart">
+                    <div class="card-header">
+                        <h3>Flow</h3>
+                    </div>
+                    <div class="canvas-wrapper">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="transactions glass">
+                <div class="card-header">
+                    <h3>Recent History</h3>
+                    <a href="add-expense.html" class="btn-text">Add New <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <ul id="transaction-list" class="transaction-list">
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>
