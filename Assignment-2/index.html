@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Samir Babar | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+    /*  FONT SETUP  */
+    @font-face {
+      font-family: 'Kalam-Regular';
+      src: url('Kalam-Regular.ttf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    /* Fallback if user doesn't have the font file yet */
+    :root {
+      --main-font: 'Kalam-Regular', 'Segoe UI', sans-serif;
+    }
+
+    /*  THEME VARIABLES  */
+    :root {
+      /* Dark Theme (Default) - Deep Blue/Black */
+      --bg-body: #02040a;
+      --bg-section: #080b16;
+      --bg-card: #0f1629;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #3b82f6;
+      /* Blue */
+      --accent-glow: rgba(59, 130, 246, 0.5);
+      --border-color: rgba(148, 163, 255, 0.2);
+      --nav-bg: rgba(15, 23, 42, 0.6);
+      --hero-gradient: radial-gradient(circle at top, #1e1b4b 0%, #02040a 100%);
+    }
+
+    [data-theme="light"] {
+      /* Light Theme - Light Blue/White */
+      --bg-body: #f0f9ff;
+      --bg-section: #e0f2fe;
+      --bg-card: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-glow: rgba(2, 132, 199, 0.3);
+      --border-color: rgba(2, 132, 199, 0.2);
+      --nav-bg: rgba(255, 255, 255, 0.6);
+      --hero-gradient: radial-gradient(circle at top, #bae6fd 0%, #f0f9ff 100%);
+    }
+
+    /*  GLOBAL STYLES  */
+    body {
+      font-family: var(--main-font);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: bold;
+      letter-spacing: -0.02em;
+    }
+
+    section {
+      transition: background-color 0.4s ease;
+    }
+
+    /*  SCROLL ANIMATION CLASSES  */
+    .hidden-el {
+      opacity: 0;
+      filter: blur(5px);
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+
+    .show-el {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    /*  COMPONENT STYLES  */
+
+    /* Theme Toggler */
+    .theme-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1050;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      transition: all 0.3s ease;
+    }
+
+    .theme-switch:hover {
+      transform: scale(1.1);
+    }
+
+    /* Glassmorphism Navbar */
+    .glass-nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.6rem 1.4rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: background 0.4s ease;
+    }
+
+    .nav-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-icon:hover {
+      color: var(--accent);
+      /* Icon turns blue */
+      background: transparent;
+      /* No background */
+      transform: translateY(-5px);
+    }
+
+
+    .nav-icon.center-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--bg-body);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    /*  TIMELINE STYLES  */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.6rem;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 4px solid var(--bg-body);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .timeline-content {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /*  SWAPPING CARD STACK  */
+    .stack-container {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      display: flex;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .stack-card {
+      position: absolute;
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stack-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* Dynamic classes for the stack logic */
+    .stack-card.front {
+      z-index: 3;
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .stack-card.middle {
+      z-index: 2;
+      transform: translateY(15px) scale(0.95);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .stack-card.back {
+      z-index: 1;
+      transform: translateY(30px) scale(0.9);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .stack-card.hidden-stack {
+      z-index: 0;
+      transform: translateY(50px) scale(0.85);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .swap-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 30px;
+      margin-top: 20px;
+      font-weight: bold;
+      box-shadow: 0 4px 15px var(--accent-glow);
+      transition: transform 0.2s;
+    }
+
+    .swap-btn:active {
+      transform: scale(0.95);
+    }
+
+    /*  GENERAL UTILS  */
+    .custom-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .text-custom-muted {
+      color: var(--text-muted) !important;
+    }
+
+    .text-custom-main {
+      color: var(--text-main) !important;
+    }
+
+    /* Specific overrides for Marquee */
+    .marquee-container {
+      background: var(--bg-card) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    /* Input styles */
+    .form-control-custom {
+      background: var(--bg-section);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .form-control-custom:focus {
+      background: var(--bg-section);
+      color: var(--text-main);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#bottomNav" data-bs-offset="80">
+
+  <button class="theme-switch" id="themeToggle" title="Toggle Theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <header id="hero" class="d-flex align-items-center" style="min-height:100vh; background: var(--hero-gradient);">
+    <div class="container hidden-el">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 text-center text-lg-start">
+          <p class="text-uppercase mb-2 small" style="letter-spacing:0.18em; color:var(--text-muted);">
+            Computer Engineering (Regional) • PCCOE
+          </p>
+
+          <h1 class="display-3 fw-bold mb-3" style="line-height:1.05; color: var(--text-main);">
+            Samir Babar<br>
+            <span style="color:var(--accent);">AI Engineer</span>
+          </h1>
+
+          <p class="lead mb-4" style="color:var(--text-muted);">
+            Building secure, scalable AI platforms and intelligent systems that turn complex ideas into
+            usable products.
+          </p>
+
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-3">
+            <a href="#projects" class="btn btn-lg fw-semibold"
+              style="background:var(--accent); color:#fff; border-radius:999px; padding-inline:2.5rem; border:none;">
+              View Projects
+            </a>
+            <a href="#contact" class="btn btn-lg"
+              style="border-radius:999px; padding-inline:2.3rem; border:1px solid var(--text-main); color:var(--text-main);">
+              Get In Touch
+            </a>
+          </div>
+
+          
+        </div>
+
+        <div class="col-lg-5">
+          <div class="position-relative mx-auto" style="max-width:360px;">
+            <div class="rounded-circle overflow-hidden shadow-lg mx-auto"
+              style="width:280px; height:280px; border:4px solid var(--border-color); background:var(--bg-card);">
+              <img
+                src="C:\Users\samir\Downloads\FSDL-main\Assignment-2\samir.png"
+                alt="Piyush portrait" class="w-100 h-100" style="object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="py-5" style="background:var(--bg-section);">
+    <div class="container py-4">
+      <div class="row g-5 align-items-start hidden-el">
+        <div class="col-lg-6">
+          <h2 class="fw-bold mb-3" style="color:var(--text-main);">About Me</h2>
+          <p class="mb-3" style="color:var(--text-muted);">
+            I am Samir Sudhir Babar, a Computer Engineering student at PCCOE, Pune, passionate about Artificial Intelligence, Machine Learning, and innovative software development.
+          </p>
+          <p class="mb-3" style="color:var(--text-muted);">
+           I enjoy building intelligent systems that solve real-world problems, especially in areas like agriculture technology, automation, and data-driven decision making.
+          </p>
+          <p class="mb-0" style="color:var(--text-muted);">
+           I constantly explore new ways to combine research and practical implementation to build impactful solutions.
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="custom-card rounded-3 p-3 h-100">
+                <small class="text-uppercase" style="color:var(--accent);">Experience</small>
+                <p class="fw-semibold mb-1 text-custom-main">Projects & Leadership</p>
+                <p class="small mb-0 text-custom-muted">
+                  Team-based development, tech leadership, and aerospace control systems.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="custom-card rounded-3 p-3 h-100">
+                <small class="text-uppercase" style="color:var(--accent);">Focus</small>
+                <p class="fw-semibold mb-1 text-custom-main">AIML . WebDev</p>
+                <p class="small mb-0 text-custom-muted">
+                  Full-stack apps, telemetry, automation, and analytics.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="custom-card rounded-3 p-3 h-100">
+                <small class="text-uppercase" style="color:var(--accent);">Location</small>
+                <p class="fw-semibold mb-0 text-custom-main">Pune, India</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="py-5" style="background:var(--bg-body);">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-4" style="color:var(--text-main);">Education</h2>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="custom-card p-4 rounded-4 h-100">
+            <h5 class="mb-1 text-custom-main">Pimpri Chinchwad College of Engineering</h5>
+            <p class="mb-1 text-custom-muted">Bachelor of Technology in Computer Engineering (Regional)</p>
+            <p class="small mb-1" style="color:var(--accent);">CGPA:7.0 / 10.0</p>
+            <p class="small mb-0 text-custom-muted">Pune, India • Aug 2023 – Jun 2027</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="custom-card p-4 rounded-4 h-100">
+            <h5 class="mb-1 text-custom-main">Shraddha Jr college of science and commerece , Ichalkaranji</h5>
+            <p class="mb-1 text-custom-muted">Higher Secondary Certificate (HSC)</p>
+            <p class="small mb-1" style="color:var(--accent);">Percentage: 72.00%</p>
+            <p class="small mb-0 text-custom-muted">Ichalkaranji, India • Jun 2021 – Mar 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-5" style="background:var(--bg-section);">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-2" style="color:var(--text-main);">Technical Skills</h2>
+      <p class="text-center mb-4 text-custom-muted">
+        Programming, web technologies, AI/ML, tools, and platforms.
+      </p>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="custom-card p-3 rounded-3 h-100">
+            <h6 class="fw-semibold mb-1 text-custom-main">Programming</h6>
+            <p class="small mb-0 text-custom-muted">C, C++, Python, JavaScript</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="custom-card p-3 rounded-3 h-100">
+            <h6 class="fw-semibold mb-1 text-custom-main">Web Stack</h6>
+            <p class="small mb-0 text-custom-muted">React, Node, MongoDB, MySQL</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="custom-card p-3 rounded-3 h-100">
+            <h6 class="fw-semibold mb-1 text-custom-main">AI / Data</h6>
+            <p class="small mb-0 text-custom-muted">Machine Learning, Data Analysis,Deep Learning,Streamlit</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="custom-card p-3 rounded-3 h-100">
+            <h6 class="fw-semibold mb-1 text-custom-main">Tools</h6>
+            <p class="small mb-0 text-custom-muted">Git, GitHub, VS Code, Postman, PowerBI</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee-container border rounded-4 p-3">
+        <marquee behavior="scroll" direction="left" scrollamount="5" class="text-custom-main">
+          <span class="mx-3"><i class="fas fa-code fa-2x" style="color:#f97316;"></i><span
+              class="ms-1 small">C</span></span>
+          <span class="mx-3"><i class="fas fa-code fa-2x" style="color:#ef4444;"></i><span
+              class="ms-1 small">C++</span></span>
+          <span class="mx-3"><i class="fab fa-python fa-2x" style="color:#60a5fa;"></i><span
+              class="ms-1 small">Python</span></span>
+          <span class="mx-3"><i class="fab fa-js-square fa-2x" style="color:#facc15;"></i><span
+              class="ms-1 small">JavaScript</span></span>
+          <span class="mx-3"><i class="fab fa-react fa-2x" style="color:#7dd3fc;"></i><span
+              class="ms-1 small">React</span></span>
+          <span class="mx-3"><i class="fab fa-node-js fa-2x" style="color:#22c55e;"></i><span
+              class="ms-1 small">Node.js</span></span>
+          <span class="mx-3"><i class="fas fa-database fa-2x" style="color:#10b981;"></i><span
+              class="ms-1 small">MongoDB</span></span>
+        </marquee>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="experience" class="py-5" style="background:var(--bg-body);">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-5" style="color:var(--text-main);">Experience</h2>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="badge bg-primary mb-2">Current</span>
+                <h5 class="mb-1 text-custom-main">AIML Intern</h5>
+                <p class="small mb-1" style="color:var(--accent);">DBTM powered sports tech ,Pune</p>
+                <p class="small mb-2 text-custom-muted">Oct 2025 – Present</p>
+                <ul class="small mb-0 text-custom-muted ps-3">
+                  <li>Analyze player performance and fitness data to identify patterns and improvement areas.</li>
+                  <li>Use data analytics techniques to evaluate athlete efficiency and performance metrics.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h5 class="mb-1 text-custom-main">Automation and Ml intern</h5>
+                <p class="small mb-1" style="color:var(--accent);">Team Anantam rocketry and space research , Pune</p>
+                <p class="small mb-2 text-custom-muted">Apr 2024 – Oct 2025</p>
+                <ul class="small mb-0 text-custom-muted ps-3">
+                  <li>Built GUI ground station for real-time telemetry.</li>
+                  <li>Implemented active fin control and stabilization.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h5 class="mb-1 text-custom-main">PCCOE Higher Study Cell Coordinator</h5>
+                <p class="small mb-1" style="color:var(--accent);">Competative Exams Head</p>
+                <ul class="small mb-0 text-custom-muted ps-3">
+                  <li>Oraganizing Events ,Sessions.</li>
+               
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-5" style="background:var(--bg-section);">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-2" style="color:var(--text-main);">Projects</h2>
+      <p class="text-center mb-5 text-custom-muted">
+        Selected work. Click "Next Project" to swap the stack.
+      </p>
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-5 col-md-8 mb-4 mb-lg-0">
+          <div class="stack-container" id="cardStack">
+
+            <div class="stack-card front" data-index="0">
+              <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9" alt="Ocean Guard">
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h5 class="fw-bold text-custom-main">Ocean Guard</h5>
+                <p class="text-custom-muted small flex-grow-1">
+                  AI-powered marine safety system (React, Python, Flask, CV) achieving 92% accuracy in oil spill
+                  detection.
+                </p>
+                <div class="d-flex flex-wrap gap-2 small">
+                  <span class="badge bg-primary">AI / CV</span>
+                  <span class="badge bg-secondary">Python</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stack-card middle" data-index="1">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=764&auto=format&fit=crop"
+                alt="Prescripto">
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h5 class="fw-bold text-custom-main">Prescripto</h5>
+                <p class="text-custom-muted small flex-grow-1">
+                  Full-stack hospital appointment platform (MERN, JWT, payment gateway) with role-based auth.
+                </p>
+                <div class="d-flex flex-wrap gap-2 small">
+                  <span class="badge bg-success">MERN</span>
+                  <span class="badge bg-info text-dark">Payments</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stack-card back" data-index="2">
+              <img src="https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?q=80&w=735&auto=format&fit=crop"
+                alt="UniSphere">
+              <div class="p-4 d-flex flex-column flex-grow-1">
+                <h5 class="fw-bold text-custom-main">UniSphere</h5>
+                <p class="text-custom-muted small flex-grow-1">
+                  Event platform with dynamic QR attendance and budgets using Next.js, Node, and Tailwind.
+                </p>
+                <div class="d-flex flex-wrap gap-2 small">
+                  <span class="badge bg-primary">Next.js</span>
+                  <span class="badge bg-warning text-dark">QR</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center">
+            <button class="swap-btn" onclick="swapStack()">
+              <i class="fas fa-layer-group me-2"></i>Next Project
+            </button>
+          </div>
+        </div>
+
+        <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
+          <h3 class="fw-bold mb-3 text-custom-main">Interactive Project Gallery</h3>
+          <p class="text-custom-muted">
+            Explore my latest work in Full Stack Development and Artificial Intelligence.
+            Each project represents a unique challenge in scalability, user experience, or algorithmic complexity.
+          </p>
+          <div class="d-flex gap-3 mt-4">
+            <div class="text-center p-3 rounded-3 custom-card">
+              <h4 class="fw-bold mb-0" style="color:var(--accent);">3+</h4>
+              <small class="text-custom-muted">Major Projects</small>
+            </div>
+            <div class="text-center p-3 rounded-3 custom-card">
+              <h4 class="fw-bold mb-0" style="color:var(--accent);">92%</h4>
+              <small class="text-custom-muted">AI Accuracy</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="achievements" class="py-5" style="background:var(--bg-body);">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-4" style="color:var(--text-main);">Achievements</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="custom-card p-4 rounded-4 h-100">
+            <h5 class="mb-3 text-custom-main">Certifications</h5>
+            <ul class="small mb-0 text-custom-muted">
+              <li>Simplilearn sql</li>
+              <li>simplileran powerbi</li>
+              <li>Udemy Android Development</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="custom-card p-4 rounded-4 h-100">
+            <h5 class="mb-3 text-custom-main">Honors</h5>
+            <ul class="small mb-0 text-custom-muted">
+              <li>HackerRank 4-Star in C & C++</li>
+              <li>2nd Runner-Up, IEEE Ideathon</li>
+              <li>Smart India Hackathon Participant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-5" style="background: linear-gradient(135deg, var(--bg-section), var(--bg-body));">
+    <div class="container hidden-el">
+      <h2 class="fw-bold text-center mb-3 text-custom-main">Contact</h2>
+      <p class="text-center mb-4 text-custom-muted">
+        Open to internships, full-time roles, and impactful collaborations.
+      </p>
+
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-5">
+          <div class="text-center text-lg-start">
+            <p class="mb-2 text-custom-main">
+              <i class="fas fa-envelope me-2"></i>
+              samirbabar0@gmail.com
+            </p>
+            <p class="mb-3 text-custom-main">
+              <i class="fas fa-phone me-2"></i>
+              +91 7447807107
+            </p>
+
+            <div class="d-flex justify-content-center justify-content-lg-start gap-3 mb-3">
+              <a href="https://www.linkedin.com/in/samir-sudhir-babar-56b527353/"
+                class="btn btn-outline-secondary btn-sm px-3 rounded-pill text-custom-main">
+                <i class="fab fa-linkedin me-2"></i>LinkedIn
+              </a>
+              <a href="https://github.com/samir-babar24"
+                class="btn btn-outline-secondary btn-sm px-3 rounded-pill text-custom-main">
+                <i class="fab fa-github me-2"></i>GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <form>
+            <div class="mb-3">
+              <label class="form-label small text-custom-muted">Name</label>
+              <input type="text" class="form-control form-control-custom" placeholder="Your name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label small text-custom-muted">Email</label>
+              <input type="email" class="form-control form-control-custom" placeholder="you@example.com">
+            </div>
+            <div class="mb-3">
+              <label class="form-label small text-custom-muted">Message</label>
+              <textarea class="form-control form-control-custom" rows="4"
+                placeholder="Tell me about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn w-100 fw-semibold text-white"
+              style="background:var(--accent); border-radius:999px;">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-3" style="background:var(--bg-section);">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-1 small text-custom-muted">© 2026 Samir Babar.</p>
+      <p class="mb-0 small text-custom-muted">Crafted with <i class="fas fa-code mx-1"></i> and Bootstrap.</p>
+    </div>
+  </footer>
+
+  <nav id="bottomNav" class="fixed-bottom d-flex justify-content-center mb-4" style="pointer-events:none;">
+    <div class="glass-nav d-flex align-items-center justify-content-center gap-3" style="pointer-events:auto;">
+
+      <a href="#hero" class="nav-icon"><i class="fas fa-house"></i></a>
+      <a href="#skills" class="nav-icon"><i class="fas fa-terminal"></i></a>
+
+      <a href="#about" class="nav-icon center-icon">
+        <i class="fas fa-user-astronaut" style="font-size:1.5rem;"></i>
+      </a>
+
+      <a href="#projects" class="nav-icon"><i class="fas fa-cubes"></i></a>
+      <a href="#experience" class="nav-icon"><i class="fas fa-history"></i></a>
+
+    </div>
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    //  THEME TOGGLE LOGIC 
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
+    const icon = themeToggleBtn.querySelector('i');
+
+    // Check saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    htmlElement.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      htmlElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+
+    function updateIcon(theme) {
+      if (theme === 'dark') {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      } else {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+
+    //  SCROLL ANIMATION OBSERVER 
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show-el');
+        }
+      });
+    }, observerOptions);
+
+    const hiddenElements = document.querySelectorAll('.hidden-el');
+    hiddenElements.forEach((el) => observer.observe(el));
+
+
+    //  CARD STACK LOGIC 
+    function swapStack() {
+      const cards = document.querySelectorAll('.stack-card');
+
+      // Move each card's visual position logic
+      cards.forEach(card => {
+        if (card.classList.contains('front')) {
+          card.classList.remove('front');
+          card.classList.add('back'); // Front goes to back
+          card.style.zIndex = "1";
+        } else if (card.classList.contains('middle')) {
+          card.classList.remove('middle');
+          card.classList.add('front'); // Middle comes to front
+          card.style.zIndex = "3";
+        } else if (card.classList.contains('back')) {
+          card.classList.remove('back');
+          card.classList.add('middle'); // Back moves to middle
+          card.style.zIndex = "2";
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
