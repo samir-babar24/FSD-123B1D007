@@ -1,0 +1,62 @@
+<%- include('./partials/header') %>
+
+<section class="destination-detail-section">
+  <div class="destination-hero" style="background-image: url('<%= destination.image %>');">
+    <div class="overlay">
+      <h1><%= destination.title %></h1>
+      <p class="tagline"><%= destination.duration %> of pure bliss</p>
+    </div>
+  </div>
+
+  <div class="detail-container">
+    <div class="detail-info">
+      <h2>About This Trip</h2>
+      <p class="full-description"><%= destination.description %></p>
+      
+      <div class="highlights">
+        <div class="highlight-item">
+          <span class="icon">✈️</span>
+          <span>Flights Included</span>
+        </div>
+        <div class="highlight-item">
+          <span class="icon">🏨</span>
+          <span>4-Star Accommodation</span>
+        </div>
+        <div class="highlight-item">
+          <span class="icon">🍳</span>
+          <span>Breakfast Included</span>
+        </div>
+      </div>
+      <div class="price-box">
+        <h3>Total Price</h3>
+        <p class="price-huge">$<%= destination.price %></p>
+      </div>
+    </div>
+    
+    <div class="booking-form-container">
+      <h2>Book This Trip</h2>
+      <form action="/book" method="POST" class="booking-form">
+        <input type="hidden" name="destinationId" value="<%= destination._id %>">
+        
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="John Doe">
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="john@example.com">
+        </div>
+        
+        <div class="form-group">
+          <label for="date">Travel Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block">Confirm Booking</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<%- include('./partials/footer') %>

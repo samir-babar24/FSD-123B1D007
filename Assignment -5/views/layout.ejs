@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wanderlust Escapes | Premium Travel Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo">Wanderlust<span>Escapes</span></a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Destinations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2>Wanderlust Escapes</h2>
+        <p>Curating extraordinary journeys for the modern traveler.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h3>Explore</h3>
+          <a href="#">Destinations</a>
+          <a href="#">Tours</a>
+          <a href="#">Cruises</a>
+        </div>
+        <div>
+          <h3>About</h3>
+          <a href="#">Our Story</a>
+          <a href="#">Reviews</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <%= new Date().getFullYear() %> Wanderlust Escapes. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

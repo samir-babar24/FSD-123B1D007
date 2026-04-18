@@ -1,0 +1,41 @@
+<%- include('./partials/header') %>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Discover the World's Best Destinations</h1>
+    <p>Your journey begins here. Explore exclusive packages to breathtaking locations around the globe.</p>
+    <a href="#destinations" class="btn btn-primary">Start Exploring</a>
+  </div>
+</section>
+
+<section id="destinations" class="destinations-section">
+  <div class="section-title">
+    <h2>Popular Destinations</h2>
+    <p>Hand-picked locations for your ultimate getaway.</p>
+  </div>
+  
+  <div class="destinations-grid">
+    <% if(destinations.length > 0) { %>
+      <% destinations.forEach(function(dest) { %>
+        <div class="card destination-card">
+          <div class="card-image-wrapper">
+            <img src="<%= dest.image %>" alt="<%= dest.title %>">
+            <span class="badge"><%= dest.duration %></span>
+          </div>
+          <div class="card-content">
+            <h3><%= dest.title %></h3>
+            <p class="description"><%= dest.description.substring(0, 100) %>...</p>
+            <div class="card-footer">
+              <span class="price">$<%= dest.price %></span>
+              <a href="/destination/<%= dest._id %>" class="btn btn-secondary">View Details</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p style="text-align:center; grid-column: 1 / -1; color: var(--text-light);">No destinations found. Check database connection.</p>
+    <% } %>
+  </div>
+</section>
+
+<%- include('./partials/footer') %>
